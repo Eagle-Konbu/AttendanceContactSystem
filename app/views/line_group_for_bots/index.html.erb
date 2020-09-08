@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Line Group For Bots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @line_group_for_bots.each do |line_group_for_bot| %>
+      <tr>
+        <td><%= line_group_for_bot.group_id %></td>
+        <td><%= link_to 'Show', line_group_for_bot %></td>
+        <td><%= link_to 'Edit', edit_line_group_for_bot_path(line_group_for_bot) %></td>
+        <td><%= link_to 'Destroy', line_group_for_bot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Line Group For Bot', new_line_group_for_bot_path %>

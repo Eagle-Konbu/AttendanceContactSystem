@@ -1,0 +1,46 @@
+<%= form_with(model: number, local: true) do |form| %>
+  <% if number.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(number.errors.count, "error") %> prohibited this number from being saved:</h2>
+
+      <ul>
+      <% number.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class='table'>
+    <tr>
+      <th><%= form.label :name %></th>
+      <td><%= form.text_field :name, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :leader_member_id_1 %></th>
+      <td><%= form.select :leader_member_id_1, Member.all.map{|m| [m.display_name, m.id]},{ :prompt => "入力してください", :include_blank => "該当なし" }, { class: 'js-searchable' } %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :leader_member_id_2 %></th>
+      <td><%= form.select :leader_member_id_2, Member.all.map{|m| [m.display_name, m.id]},{ :prompt => "入力してください" }, { class: 'js-searchable' } %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :leader_member_id_3 %></th>
+      <td><%= form.select :leader_member_id_3, Member.all.map{|m| [m.display_name, m.id]},{ :prompt => "入力してください" }, { class: 'js-searchable' } %></td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+  <script>
+    $(function() {
+        $('.js-searchable').select2({
+            theme: 'bootstrap',
+            dropdownAutoWidth: true,
+            width: 'auto'
+        });
+    });
+  </script>
+<% end %>

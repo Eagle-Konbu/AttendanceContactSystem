@@ -1,0 +1,36 @@
+<h1>出欠連絡</h1>
+
+<div style='width:100%; overflow-x:scroll'>
+<table class="table table-striped text-nowrap">
+    <thead>
+        <th>練習名</th>
+        <th>出席</th>
+        <th>欠席</th>
+        <th>遅刻</th>
+        <th>早退</th>
+        <th>未提出</th>
+    </thead>
+    <% @practices.each do |p| %>
+    <% counts = (0..4).map {|i| Member.valid_members(p).joins(:contacts).where(contacts: { status: i, practice_id: p.id }).count } %>
+        <tr>
+            <td><a href="/executive/contacts_list/<%= p.id %>"><%= p.display_short_name %></a></td>
+            <td><%= counts[0].to_s + "人" %></td>
+            <td><%= counts[1].to_s + "人" %></td>
+            <td><%= counts[2].to_s + "人" %></td>
+            <td><%= counts[3].to_s + "人" %></td>
+            <td><%= (Member.count - counts.sum).to_s + "人" %></td>
+        </tr>
+    <% end %>
+    <% @obsolete_practices.each do |p| %>
+    <% counts = (0..4).map {|i| Member.valid_members(p).joins(:contacts).where(contacts: { status: i, practice_id: p.id }).count } %>
+        <tr style="color: gray">
+            <td><a href="/executive/contacts_list/<%= p.id %>"><%= p.display_short_name %></a></td>
+            <td><%= counts[0].to_s + "人" %></td>
+            <td><%= counts[1].to_s + "人" %></td>
+            <td><%= counts[2].to_s + "人" %></td>
+            <td><%= counts[3].to_s + "人" %></td>
+            <td><%= (Member.count - counts.sum).to_s + "人" %></td>
+        </tr>
+    <% end %>
+</table>
+</div>

@@ -1,0 +1,95 @@
+<h3>基本情報</h3>
+
+<table class="table table-striped">
+  <tr>
+    <td>本名</td>
+    <td><%= @member.full_name %></td>
+  </tr>
+  <tr>
+    <td>本名(フリガナ)</td>
+    <td><%= @member.full_name_kana %></td>
+  </tr>
+  <tr>
+    <td>あだ名（敬称略）</td>
+    <td><%= @member.nickname %></td>
+  </tr>
+  <tr>
+    <td>期</td>
+    <td><%= @member.generation %></td>
+  </tr>
+</table>
+<br>
+<% if @member.leave_on_absence %>
+  <h2><center><font color="red">現在休サー中</font></center></h2>
+<% else %>
+
+<% if @recent_practice.blank? %>
+<% else %>
+
+<h3>出欠回数</h3>
+<p><%= @recent_practice.display_long_date %>現在</p>
+<table class='table'>
+  <thead>
+    <tr>
+      <td>出席</td>
+      <td>欠席</td>
+      <td>遅刻</td>
+      <td>早退</td>
+      <td>その他</td>
+      <td>未提出</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @counts[0] %></td>
+      <td><%= @counts[1] %></td>
+      <td><%= @counts[2] %></td>
+      <td><%= @counts[3] %></td>
+      <td><%= @counts[4] %></td>
+      <td><%= @counts[5] %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>出欠履歴</h3>
+<table class='table'>
+  <thead>
+    <tr>
+      <td>日付</td>
+      <td>名前</td>
+      <td>状況</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @practices.each do |p| %>
+      <tr>
+        <td><%= p.display_date %></td>
+        <td><%= p.name %></td>
+        <% if Contact.find_by(practice_id: p.id, member_id: @member.id) == nil then %>
+          <td><span class='text-primary'>未提出</span></td>
+        <% else %>
+          <% 
+            contact = Contact.find_by(practice_id: p.id, member_id: @member.id) 
+            if contact.status == 'attend' then
+                status_class = "text-success"
+            elsif contact.status == 'absent' then 
+                status_class = "text-danger"
+            elsif contact.status == 'late' then
+                status_class = "text-warning"
+            else
+                status_class = "text-info"
+            end
+          %>
+          <td><span class=<%= status_class %>><%= contact.status_i18n %></span></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>

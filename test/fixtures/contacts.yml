@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  date: 2019-12-19
+  status: 1
+  reason: MyText
+
+two:
+  name: MyText
+  date: 2019-12-19
+  status: 1
+  reason: MyText

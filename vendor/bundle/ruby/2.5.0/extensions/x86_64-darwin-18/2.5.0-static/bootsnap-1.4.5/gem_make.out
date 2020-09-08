@@ -1,0 +1,15 @@
+current directory: /Users/atsuya/Development/RubyOnRails/AbsentSystem/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
+/Users/atsuya/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20200131-9708-7lh81s.rb extconf.rb
+creating Makefile
+
+current directory: /Users/atsuya/Development/RubyOnRails/AbsentSystem/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/atsuya/Development/RubyOnRails/AbsentSystem/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/atsuya/Development/RubyOnRails/AbsentSystem/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20200131-9708-qgvda/bootsnap

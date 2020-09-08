@@ -1,0 +1,197 @@
+ja:
+  enums:
+    contact:
+      status:
+        attend: "出席"
+        absent: "欠席"
+        late: "遅刻"
+        go_early: "早退"
+        other: "その他"
+        unknown: "未提出"
+    executive_user:
+      position:
+        other: "その他"
+        chief: "幹事長"
+        vice_chief: "副幹事長"
+        accountant: "会計"
+        public_relations: "渉外"
+        assistant: "幹部補佐"
+        coach: "コーチ"
+        vice_coach: "副コーチ"
+        subsection_cheif: "係長"
+    practice:
+      notice_before:
+        before_15m: "15分前"
+        before_30m: "30分前"
+        before_1h: "1時間前"
+        before_2h: "2時間前"
+        before_6h: "6時間前"
+        before_1d: "1日前(前日12:00)"
+      kind:
+        normal: "通練"
+        run_thru: "通し"
+        part_time: "コマ練"
+        other: "その他"
+  
+  activerecord:
+    errors:
+        messages:
+          record_invalid: 'バリデーションに失敗しました: %{errors}'
+          restrict_dependent_destroy:
+            has_one: "%{record}が存在しているので削除できません"
+            has_many: "%{record}が存在しているので削除できません"
+    models:
+      contact: "出欠連絡"
+      executive_user: "幹部ユーザー"
+      member: "メンバー"
+      practice: "練習"
+    attributes:
+      contact:
+        member_id: "メンバーID"
+        practice_id: "練習ID"
+        status: "状況"
+        reason: "理由"
+      executive_user:
+        email: "メールアドレス"
+        encrypted_password: "暗号化されたパスワード"
+        reset_password_token: "reset_password_token"
+        reset_password_sent_at: "reset_password_sent_at"
+        remember_created_at: "remember_created_at"
+        admin: "管理者"
+        nickname: "あだ名"
+        user_id: "ユーザーID"
+        receive_email: "メールを受信する"
+        position: "役職"
+      member:
+        first_name: "名"
+        last_name: "姓"
+        first_kana: "名(フリガナ)"
+        last_kana: "姓(フリガナ)"
+        nickname: "あだ名"
+        generation: "期"
+      practice:
+        name: "名前"
+        date: "日付"
+        start_time: "開始時間"
+        end_time: "終了時間"
+        place: "場所"
+        kind: "種類"
+        includes_obog: "OBOGも対象"
+
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+
+    day_names: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+    abbr_day_names: ["日", "月", "火", "水", "木", "金", "土"]
+
+    month_names: [~, "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+    abbr_month_names: [~, "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+
+    order:
+    - :year
+    - :month
+    - :day
+      
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%y/%m/%d %H:%M"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
+    am: "午前"
+    pm: "午後"
+  
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      accepted: を受諾してください
+      blank: を入力してください
+      confirmation: と%{attribute}の入力が一致しません
+      empty: を入力してください
+      equal_to: は%{count}にしてください
+      even: は偶数にしてください
+      exclusion: は予約されています
+      greater_than: は%{count}より大きい値にしてください
+      greater_than_or_equal_to: は%{count}以上の値にしてください
+      inclusion: は一覧にありません
+      invalid: は不正な値です
+      less_than: は%{count}より小さい値にしてください
+      less_than_or_equal_to: は%{count}以下の値にしてください
+      model_invalid: 'バリデーションに失敗しました: %{errors}'
+      not_a_number: は数値で入力してください
+      not_an_integer: は整数で入力してください
+      odd: は奇数にしてください
+      other_than: は%{count}以外の値にしてください
+      present: は入力しないでください
+      required: を入力してください
+      taken: はすでに存在します
+      too_long: は%{count}文字以内で入力してください
+      too_short: は%{count}文字以上で入力してください
+      wrong_length: は%{count}文字で入力してください
+    template:
+      body: 次の項目を確認してください
+      header:
+        one: "%{model}にエラーが発生しました"
+        other: "%{model}に%{count}個のエラーが発生しました"
+  helpers:
+    select:
+      prompt: 選択してください
+    submit:
+      create: 登録する
+      submit: 保存する
+      update: 更新する
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%n%u"
+        precision: 0
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: 円
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: 十億
+          million: 百万
+          quadrillion: 千兆
+          thousand: 千
+          trillion: 兆
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n%u"
+        units:
+          byte: バイト
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: "、"
+      two_words_connector: "、"
+      words_connector: "、"

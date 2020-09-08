@@ -1,0 +1,32 @@
+<h1>練習</h1>
+<br>
+<%= link_to "追加", new_practice_path, class:"btn btn-primary" %>
+<br>
+<table class="table table-striped text-nowrap">
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>日付</th>
+      <th>開始時間</th>
+      <th>終了時間</th>
+      <th>場所</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @practices.each do |practice| %>
+      <tr>
+        <td><%= practice.name %></td>
+        <td><%= practice.display_date %></td>
+        <td><%= practice.start_time.strftime("%H:%M") %></td>
+        <td><%= practice.end_time.strftime("%H:%M") %></td>
+        <td><%= practice.place %></td>
+        <td><%= link_to "編集", edit_practice_path(practice), class:"btn btn-primary" %></td>
+        <td><%= link_to "削除", practice, method: :delete, data: { confirm: "本当に削除しますか？" }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

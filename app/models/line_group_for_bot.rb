@@ -1,0 +1,2 @@
+class LineGroupForBot < ApplicationRecord
+end

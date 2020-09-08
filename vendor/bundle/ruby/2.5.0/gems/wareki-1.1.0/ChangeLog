@@ -1,0 +1,86 @@
+2019-12-24  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 1.1.0
+
+	[ by Akinori MUSHA <knu@idaemons.org> ]
+	* Partially traditional kanji variants support
+	* Compatibility fix: Date.parse with no arguement
+	* Provides Date._parse overrides (currently no kansuji
+	  support for time fields at present)
+
+2019-04-15  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Verion: 1.0.0 🎉, compat with 0.x mostly.
+	* Split kansuji handling to 'ya_kansuji' gem
+	* Deprecate Wareki::Kansuji module
+	* Revert Utils.kan_to_i and Utils.i_to_kan as deprecated
+
+2019-04-11  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.4.2
+	* Update square era name support for "㋿"
+	* Support unicode variant parsing 令 (U+F9A8)
+
+2019-04-08  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.4.1
+	* Raise ArgumentError for empty string (regression on 0.4.0).
+	  (Thanks to Katsusuke Shimizu @katsusuke)
+
+2019-04-01  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.4.0
+	* Add new era definition for "令和"
+	* Support parse without year (#9)
+	  (Thanks to a report report from @ryooo)
+	* Add support for "元旦"
+	* Provide Wareki::VERSION
+
+2018-11-09  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.3.0
+	* Support "大字"-style kansuji.
+
+2018-09-19  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.2.2
+	* Tiny improvement on date validation
+
+2018-08-27  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.2.1
+	* Support square era name chars (㍾ ㍽ ㍼ ㍻)
+
+2017-07-25  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.2.0
+	* Support date calculation (limited with Number)
+	* Add compare methods
+	* Fix error with "晦日" after Date::GREGORIAN
+
+2017-06-01  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version: 0.1.4
+	* Add ad-hoc support for 西暦 and 紀元前
+
+2017-02-04  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version 0.1.3
+	* Fix last day of era/year handling issue (#2)
+	* Fix kansuji converter for large numbers
+	  (This is NOT affected with ordinal date numbers)
+
+2015-09-03  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version 0.1.2
+	* Fix file permissions (#1)
+
+2015-08-23  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version 0.1.1
+	* Fix gemspec: dependency of ruby version
+
+2015-08-23  Tatsuki Sugiura  <sugi@nemui.org>
+
+	* Version 0.1.0.
+	* First release

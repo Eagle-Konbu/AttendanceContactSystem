@@ -1,0 +1,3 @@
+$("#contact_form").html("<%= escape_javascript(render 'form', { contact: @contact, practices: @valid_practices } ) %>");
+$('#submitted_alert').html("");
+$("#name_alert").html("");

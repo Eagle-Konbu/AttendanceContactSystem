@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped">
+  <tr>
+    <th>M名</th>
+    <td><%= @number.name %></td>
+  </tr>
+  <tr>
+    <th>Mリーダー1</th>
+    <td><%= Member.find_by(id: @number.leader_member_id_1)&.nickname %></td>
+  </tr>
+  <tr>
+    <th>Mリーダー2</th>
+    <td><%= Member.find_by(id: @number.leader_member_id_2)&.nickname %></td>
+  </tr>
+  <tr>
+    <th>Mリーダー3</th>
+    <td><%= Member.find_by(id: @number.leader_member_id_3)&.nickname %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_number_path(@number) %> |
+<%= link_to 'Back', numbers_path %>

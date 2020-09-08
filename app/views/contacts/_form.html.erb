@@ -1,0 +1,78 @@
+<%= form_with(model: contact, url: contacts_add_path, local: true) do |form| %>
+    <% if contact.errors.any? %>
+        <br>
+        <div class='alert alert-danger'>
+        <h4>全て入力必須です！(出席でない場合は理由も)</h4>
+        </div>
+        <br>
+    <% end %>
+
+    <div id='submitted_alert'>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th class='control-label' id='name'>名前</th>
+            <td><%= form.select :member_id, Member.where(leave_on_absence: false).order_member.map{|m| [m.display_name, m.id]},{:prompt => "入力してください", :selected => params[:default_member_id]}, { class: 'js-searchable', id: 'member_id' } %></td>
+        </tr>
+        <tr>
+            <% if params[:default_member_id].blank? %>
+            <th class='control-label'>練習<small id='name_alert'><font color='red'><br>最初に名前を選択して下さい</font></small></th>
+            <% else %>
+            <th class='control-label'>練習</th>
+            <% end %>
+            <td>
+                <%= form.select :practice_id, practices.map{|p| [p.display_short_name, p.id]}, {:prompt => "選択してください"}, { class:'form-control', id:'practice_id' } %>
+                <small class='form-text text-muted'><span id='place_label'></span></small>                
+            </td>
+        </tr>
+        <tr>
+            <th class='control-label' id='status_label'>出席/欠席/遅刻/早退</th>
+            <td><%= form.select :status, Contact.statuses.except(:unknown).keys.map{|k| [I18n.t("enums.contact.status.#{k}"), k]}, {:include_blank => "選択してください"}, {class:'form-control'} %></td>
+        </tr>
+        <tr>
+            <th class='control-label'>理由</th>
+            <td><%= form.text_field :reason, :placeholder => "出席の場合は不要", class:'form-control' %></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><%= form.submit "送信", class:"btn btn-primary" %></td>
+        </tr>
+    </table>
+    <script>
+        $(function() {
+            $('.js-searchable').select2({
+                theme: 'bootstrap',
+                dropdownAutoWidth: true,
+                width: 'auto'
+            });
+            $('#member_id').change(function () { 
+                var m_id = $('#member_id').has('option:selected').val().toString();
+                var p_id = $('#practice_id').has('option:selected').val().toString();
+                $.ajax({
+                    url: '/contacts/check_aveilable_practices',
+                    data:{ default_member_id: m_id }
+                });
+                if(m_id && p_id) {
+                    $.ajax({
+                        url: '/contacts/check_submitted?member_id=' + m_id + '&practice_id=' + p_id
+                    });
+                }
+            });
+            $('#practice_id').change(function () {
+                var m_id = $('#member_id').has('option:selected').val();
+                var p_id = $('#practice_id').has('option:selected').val();
+                if(m_id && p_id) {
+                    $.ajax({
+                        url: '/contacts/check_submitted',
+                        data:{ member_id: m_id, practice_id: p_id }
+                    });
+                }
+                $.ajax({
+                    url: "/contacts/check_practice_detail",
+                    data:{ practice_id: p_id }
+                });
+            });
+        });
+    </script>
+<% end %>

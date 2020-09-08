@@ -1,0 +1,37 @@
+<br>
+<h5><%= @msg %></h5>
+<p><%= link_to "サインアウト", destroy_executive_user_session_path, method: :delete %></p>
+<br>
+
+<div class='card-deck'>
+
+<a href=<%= @recent_practice_link %> class='card'>
+    <%= image_tag 'mail.jpg', class: 'card-img-top' %>
+    <div class='card-body'>
+        <h4 class='card-title'>直近の出欠連絡</h4>
+    </div>
+</a>
+<% if !@subsection_cheif %>
+<a href="/practices/new" class='card'>
+    <%= image_tag 'practice.jpg', class: 'card-img-top' %>
+    <div class='card-body'>
+        <h4 class='card-title'>練習を追加</h4>
+    </div>
+</a>
+<% end %>
+<a href="/executive_users/edit" class='card'>
+    <%= image_tag 'id.jpg', class: 'card-img-top' %>
+    <div class='card-body'>
+        <h4 class='card-title'>アカウント情報変更</h4>
+    </div>
+</a>
+<% if @admin %>
+<a href="/admin" class='card' target='_blank'>
+    <%= image_tag 'admin.jpg', class: 'card-img-top' %>
+    <div class='card-body'>
+        <h4 class='card-title'>管理者用ページ</h4>
+    </div>
+</a>
+<% end %>
+</div>
+

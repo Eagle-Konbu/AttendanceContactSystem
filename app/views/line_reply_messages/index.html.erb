@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Line Reply Messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Detail</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @line_reply_messages.each do |line_reply_message| %>
+      <tr>
+        <td><%= line_reply_message.detail %></td>
+        <td><%= link_to 'Show', line_reply_message %></td>
+        <td><%= link_to 'Edit', edit_line_reply_message_path(line_reply_message) %></td>
+        <td><%= link_to 'Destroy', line_reply_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Line Reply Message', new_line_reply_message_path %>

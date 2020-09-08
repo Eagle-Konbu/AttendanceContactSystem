@@ -1,0 +1,37 @@
+<div style='width:100%; overflow-x:scroll'>
+<table class="table table-striped text-nowrap">
+    <thead>
+    <tr>
+        <th>期</th><th>メンバー名</th><th>状況</th><th>理由</th>
+    </tr>
+    </thead>
+    <% data.each do |obj| %>
+    <tr>
+        <% if Member.find_by(id: obj.member_id) == nil then %>
+        <td>Unknown</td>
+        <td>Unknown</td>
+        <% else %>
+        <td><%= Member.find_by(id: obj.member_id).generation %></td>
+        <td><%= Member.find_by(id: obj.member_id).display_nickname(false, Member.find_by(id: obj.member_id).is_obog) %></td>
+
+        <% end %>
+
+        <%  
+            @status_class = "text-primary" 
+            if obj.status == 'attend' then
+                @status_class = "text-success"
+            elsif obj.status == 'absent' then 
+                @status_class = "text-danger"
+            elsif obj.status == 'late' then
+                @status_class = "text-warning"
+            elsif obj.status == 'go_early' then
+                @status_class = "text-info"
+            end
+        %>
+        <td><span class=<%= @status_class %>><%= obj.status_i18n %></span></td>
+        
+        <td><%= obj.reason %></td>
+    </tr>
+    <% end %>
+</table>
+</div>

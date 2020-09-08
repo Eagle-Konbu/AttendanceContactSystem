@@ -1,0 +1,31 @@
+<h1>Members</h1>
+
+<%= link_to 'New Member', new_member_path, class:"btn btn-primary" %>
+
+<div style='width:100%; overflow-x:scroll'>
+<table class="table table-striped text-nowrap">
+  <thead>
+    <tr>
+      <th>期</th>
+      <th>本名</th>
+      <th>あだ名</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.generation %></td>
+        <td><%= member.full_name %></td>
+        <td><%= member.nickname %></td>
+        <td><%= link_to "表示", member_path(member), class:"btn btn-success" %></td>
+        <td><%= link_to "編集", edit_member_path(member), class:"btn btn-primary" %></td>
+        <td><%= link_to "削除", member, method: :delete, data: { confirm: "本当に削除しますか？" }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>

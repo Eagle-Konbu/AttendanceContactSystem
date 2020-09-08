@@ -1,0 +1,57 @@
+<%= form_with(model: practice, local: true) do |form| %>
+  <% if practice.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><i class='fa fa-exclamation-triangle'></i> <%= practice.errors.count %>つのエラーが発生しました:</h2>
+      <ul>
+      <% practice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class='table'>
+    <tr>
+      <th>種類</th>
+      <% if practice.kind.blank? %>
+      <td><%= form.select :kind, Practice.kinds.keys.map{|k| [I18n.t("enums.practice.kind.#{k}"), k]}, {:include_blank => "選択してください", :selected => -1}, {class:'form-control'} %></td>
+      <% else %>
+      <td><%= form.select :kind, Practice.kinds.keys.map{|k| [I18n.t("enums.practice.kind.#{k}"), k]}, {:include_blank => "選択してください"}, {class:'form-control'} %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>名前</th>
+      <td><%= form.text_field :name, :placeholder => "その他の場合は必須", class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>日付</th>
+      <td><%= form.date_select :date %></td>
+    </tr>
+    <tr>
+      <th>開始時間</th>
+      <td><%= form.time_select :start_time %></td>
+    </tr>
+    <tr>
+      <th>終了時間</th>
+      <td><%= form.time_select :end_time %></td>
+    </tr>
+    <tr>
+      <th>場所</th>
+      <td><%= form.text_field :place, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>持ち物</th>
+      <td><%= form.text_field :belonging, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>OBOGも対象</th>
+      <td><%= form.check_box :includes_obog %></td>
+    </tr>
+    <tr>
+      <th>当日3時間前にリマインド</th>
+      <td><%= form.check_box :final_reminder_aveilable %></td>
+    </tr>
+  </table>
+
+  <%= form.submit "追加", class:'btn btn-primary' %>
+<% end %>

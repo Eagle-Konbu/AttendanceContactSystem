@@ -1,0 +1,20 @@
+<h2>パスワードリセット</h2>
+
+<table class='table table-striped'>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% ExecutiveUser.all.each do |user| %>
+        <tr>
+            <th><%= user.user_id %></th>
+            <th><%= user.nickname %></th>
+            <th><%= button_to "パスワードリセット", { :action => 'reset' }, { params: { id: user.id }, class:'btn btn-danger' } %></th>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+<%= form_with(model: member, local: true) do |form| %>
+  <% if member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+      <% member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class='table'>
+    <tr>
+      <th>姓</th>
+      <td><%= form.text_field :last_name, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>名</th>
+      <td><%= form.text_field :first_name, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>姓(フリガナ)</th>
+      <td><%= form.text_field :last_kana, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>名(フリガナ)</th>
+      <td><%= form.text_field :first_kana, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>あだ名（敬称略）</th>
+      <td><%= form.text_field :nickname, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>期</th>
+      <td><%= form.number_field :generation, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <th>休サー</th>
+      <td><%= form.check_box :leave_on_absence, class:'form-control' %></td>
+    </tr>
+  </table>
+
+  <%= form.submit "追加", class:'btn btn-primary' %>
+<% end %>

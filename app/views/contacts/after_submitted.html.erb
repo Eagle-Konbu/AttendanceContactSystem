@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>入力完了</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+
+<body class="container">
+    <br>
+    <h1>出欠連絡</h1>
+    <h3>Thank you!</h3>
+
+    <p>正常に入力が送信されました</p>
+    <%= link_to 'Googleカレンダーに追加', 'https://www.google.com/calendar/r/eventedit?text=' + @practice.name + "&dates=" + @practice.date.strftime("%Y%m%dT") + @practice.start_time.strftime("%H%M%S/") + @practice.date.strftime("%Y%m%dT") + @practice.end_time.strftime("%H%M%S") + "&location=" + @practice.place , class:"btn btn-success", target: "_blank" %>
+
+    <% if @unsubmitted_practices.present? %>
+    <div class='alert alert-warning'>
+        <h5><span class='blinking'><i class='fa fa-exclamation-triangle'></i></span> お知らせ</h5>
+        <p>まだ全ての練習の出欠連絡が提出されていません。可能であれば早めの入力をお願い致します。<br>まだ提出されていない練習は以下の通りです。</p>
+        <% @unsubmitted_practices.each do |p| %>
+        <p><%= p.display_name %></p>
+        <% end %>
+    </div>
+    <% end %>
+
+    <%= link_to '続けて入力する', '/contacts/add/' + @member_id.to_s, class:"btn btn-primary" %>
+</body>
+
+</html>

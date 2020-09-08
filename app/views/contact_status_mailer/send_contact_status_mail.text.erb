@@ -1,0 +1,60 @@
+<%= @receiver.nickname %>さん
+
+お疲れ様です。<%= Date.today.strftime("%Jf") + Time.now.strftime("%H:%M") %>現在の、<%= @practice.display_name %>の出欠状況をお知らせいたします。
+
+出席:<%= @counts[0].to_s %>名
+欠席:<%= @counts[1].to_s %>名
+遅刻:<%= @counts[2].to_s %>名
+早退:<%= @counts[3].to_s %>名
+その他:<%= @counts[4].to_s %>名
+未提出:<%= (Member.count - @counts.sum).to_s %>名
+
+<% unless @absent_contacts.empty? %>
+欠席者は以下の通りです。
+<% @absent_contacts.each do |c| %>
+<%= Member.find(c.member_id).display_nickname(true,false) %>
+<% end %>
+<% end %>
+
+<% unless @late_contacts.empty? %>
+遅刻者は以下の通りです。
+<% @late_contacts.each do |c| %>
+<%= Member.find_by(id: c.member_id).display_nickname(true,false) %>
+<% end %>
+<% end %>
+
+<% unless @go_early_contacts.empty? %>
+早退者は以下の通りです。
+<% @go_early_contacts.each do |c| %>
+<%= Member.find_by(id: c.member_id).display_nickname(true,false) %>
+<% end %>
+<% end %>
+
+<% unless @other_contacts.empty? %>
+以下の方がその他で登録しています。詳細はログインして、出欠連絡一覧でご確認ください。
+<% @other_contacts.each do |c| %>
+<%= Member.find_by(id: c.member_id).display_nickname(true,false) %>
+<% end %>
+<% end %>
+
+<% unless @unsubmitted_member.empty? %>
+連絡未提出者は以下の通りです。
+<% @unsubmitted_member.each do |m| %>
+<%= m %>
+<% end %>
+<% end %>
+
+期ごとの出席率は以下の通りです。（遅刻を含む）
+<% (@min_generation..@max_generation).each do |g| %>
+<% @member_count = Member.where(generation: g).count %>
+<% @attend_count = Contact.where(practice_id: @practice.id, status: 'attend').left_joins(:member).where(members: { generation: g }).count %>
+<% @late_count = Contact.where(practice_id: @practice.id, status: 'late').left_joins(:member).where(members: { generation: g }).count %>
+<%= g %>期:<%= number_to_percentage((@attend_count + @late_count).to_f / @member_count * 100,precision: 1 ) %>
+<% end %>
+
+
+理由などの詳細につきましては、ご自身でログインの上ご確認いただきますようお願い申し上げます。
+これ以降、出欠連絡を受信した場合は、出席でない場合に限りメールでお知らせいたします。
+
+このメールは送信用です。送信いただいても返信はできかねます。
+本日も当システムをご利用いただきまして、ありがとうございます。
