@@ -1,7 +1,7 @@
 # Attendance Contact System
 
 Ruby on Railsを用いた，サークルにおける出欠連絡管理システムです．
-筆者が所属しているサークルではHerokuを用いてデプロイしました．
+筆者が所属していたサークルではHerokuを用いてデプロイしました．
 
 # バージョン
 
